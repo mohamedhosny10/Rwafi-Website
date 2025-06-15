@@ -1,0 +1,128 @@
+# Cursor Prompt: Rwafi Logistics Portal
+
+Create a modern, responsive React application for Rwafi - a logistics facilitator helping companies enter Saudi Arabia. The design should be clean, professional, and support both Arabic and English.
+
+## Design Requirements
+
+### Header & Navigation
+- Clean header with Rwafi logo on the right
+- Navigation menu with "المزيد" (More) dropdown
+- Login button styled as a rounded blue button "تسجيل الدخول"
+- Top navigation links: "دليل الجهات الحكومية" (Government Directory), "تصفح الخدمات" (Browse Services)
+
+### Hero Section
+- Large centered headline: "أي خدمة؟" (Which Service?)
+- Subtitle: "وفر وقتك و استفد من خدمات مصر الرقمية في دقائق معدودة" 
+- But adapt this for Rwafi: "Streamline your business entry into Saudi Arabia with our comprehensive logistics solutions"
+- Hero tagline reflecting Rwafi's mission: "Your Gateway to Saudi Market Success"
+
+### Search Section
+- Prominent search bar with placeholder "أنا محتاج..." (I need...)
+- Blue search button inside the search bar with "ابحث" (Search)
+- Popular service tags below: "المحاكم", "التوثيق", "السجل التجاري", "رخصة", "مركباتي", "التموين", "التأمين الاجتماعي"
+
+### Services Section (Scroll Down)
+Create 4 service cards in a responsive grid:
+
+1. **Topping Up | زيادة الرصيد**
+   - Description: "Reporting a payment to Rwafi Finance team so they can top up your account."
+   - Arabic: "ابلاغ فريق حسابات روافي بعملية دفع حتي يقوموا بتحديث الحسابات و زيادة الرصيد"
+
+2. **Transfer Request | طلب تحويل** 
+   - Description: "Balance refund or transfer between accounts."
+   - Arabic: "استرداد او تحويل الرصيد بين الحسابات"
+
+3. **Complaint | تقديم شكوى**
+   - Description: "Report a complaint to Rwafi Management team."
+   - Arabic: "تقديم شكوي للفريق الاداري لروافي الأحلام"
+
+4. **Government Affairs | الخدمات الحكومية**
+   - Description: "Request government affair service."
+   - Arabic: "طلب خدمات حكومية كتجديد الأقامة و الخروج و العودة"
+
+Each service card should have:
+- Icon representation
+- Bilingual title (Arabic/English)
+- Description in both languages
+- "Click Here" button that's interactive
+
+### Authentication System
+- Modal-based login/signup system
+- Smooth transitions between login and signup forms
+- Fields: Email, Password, (Name for signup)
+- Modern form validation
+- Social login options if possible
+
+## Technical Requirements
+
+### Responsive Design
+- Mobile-first approach
+- Breakpoints: sm (640px), md (768px), lg (1024px), xl (1280px)
+- Grid system for service cards (1 col mobile, 2 col tablet, 4 col desktop)
+- Flexible search bar that adapts to screen size
+
+### Interactions & Animations
+- Smooth scroll between sections
+- Hover effects on service cards and buttons
+- Loading states for search functionality
+- Form validation with smooth error messages
+- Transition animations between login/signup
+
+### Styling
+- Use Tailwind CSS for styling
+- Color scheme: Blue primary (#1e40af), white backgrounds, subtle grays
+- Arabic-friendly fonts (system fonts that support Arabic well)
+- RTL support for Arabic text
+- Clean, government portal aesthetic
+
+### Functionality (Frontend Only - No Backend)
+- Mock search functionality with static suggestions
+- Service card interactions (console.log clicks for now)
+- Modal management for auth (UI only, no real authentication)
+- Form handling with React state (no API calls)
+- Responsive navigation menu
+- All data should be hardcoded/mocked in constants
+
+## File Structure
+```
+src/
+  components/
+    Header.jsx
+    Hero.jsx
+    SearchSection.jsx
+    ServicesGrid.jsx
+    AuthModal.jsx
+    ServiceCard.jsx
+  hooks/
+    useAuth.js
+    useModal.js
+  utils/
+    constants.js
+  App.jsx
+  index.css
+```
+
+## Key Features to Implement (Frontend Only)
+1. Smooth scrolling navigation
+2. Interactive search with mock autocomplete suggestions
+3. Service filtering with static data
+4. Multi-language support toggle (client-side only)
+5. Responsive image handling
+6. Accessibility compliance (WCAG guidelines)
+7. SEO-friendly structure
+8. **All functionality should be UI/UX focused with mock data**
+9. **No API calls, no backend integration**
+10. **Use React state and local storage for any data persistence**
+
+## Additional Notes
+- Make it feel premium and trustworthy (government/enterprise grade)
+- Ensure fast loading times with optimized images
+- Add subtle micro-interactions
+- Consider adding a mock chatbot widget (UI only)
+- Include breadcrumb navigation for visual hierarchy
+- Add loading skeletons for better UX
+- **Everything should work as a static frontend - no server required**
+- **Use mock data files for all content**
+- **Form submissions should show success/error states without actual processing**
+
+Focus on creating a polished, professional interface that showcases Rwafi's services with excellent UX/UI, but keep it entirely frontend-focused.
