@@ -40,21 +40,12 @@ const ServiceCard = ({ service, onClick }) => {
         </p>
         
         {/* CTA Button */}
-        {service.id === 'transfer' ? (
-          <button 
-            onClick={() => onClick(service)}
-            className="w-full px-6 py-3 bg-primary text-white rounded-xl hover:bg-blue-800 transition-all duration-200 font-semibold focus:outline-none focus:ring-4 focus:ring-blue-100"
-          >
-            طلب الخدمة
-          </button>
-        ) : (
-          <button 
-            onClick={() => onClick(service)}
-            className="w-full px-6 py-3 bg-primary text-white rounded-xl hover:bg-blue-800 transition-all duration-200 font-semibold focus:outline-none focus:ring-4 focus:ring-blue-100"
-          >
-            Click Here
-          </button>
-        )}
+        <button 
+          onClick={() => onClick(service)}
+          className="w-full px-6 py-3 bg-primary text-white rounded-xl hover:bg-blue-800 transition-all duration-200 font-semibold focus:outline-none focus:ring-4 focus:ring-blue-100"
+        >
+          {service.id === 'transfer' ? 'طلب الخدمة' : 'Click Here'}
+        </button>
       </div>
     </div>
   );
