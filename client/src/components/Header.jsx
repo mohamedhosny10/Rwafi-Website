@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { ChevronDownIcon, Bars3Icon, LanguageIcon } from '@heroicons/react/24/outline';
 import { NAVIGATION_LINKS, MORE_DROPDOWN_ITEMS } from '../utils/constants';
-import { useAuth } from '../hooks/useAuth';
-import { useAuthModal } from '../hooks/useModal';
+import { useAuth } from '../hooks/useAuth.jsx';
+import { useAuthModal } from '../hooks/useModal.jsx';
 
 const Header = () => {
   const [isMoreDropdownOpen, setIsMoreDropdownOpen] = useState(false);

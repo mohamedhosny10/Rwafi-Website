@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { loginSchema, signupSchema, serviceRequestSchema, searchSchema } from "@shared/schema";
+import { loginSchema, signupSchema, serviceRequestSchema, searchSchema, insertUserSchema } from "@shared/schema";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -37,7 +37,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.post("/api/auth/signup", async (req, res) => {
     try {
-      const data = signupSchema.omit({ confirmPassword: true }).parse(req.body);
+      const { confirmPassword, ...signupData } = req.body;
+      const data = insertUserSchema.parse(signupData);
       
       // Check if user already exists
       const existingUser = await storage.getUserByEmail(data.email);

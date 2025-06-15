@@ -5,8 +5,8 @@ import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useAuth } from '../hooks/useAuth';
-import { useAuthModal } from '../hooks/useModal';
+import { useAuth } from '../hooks/useAuth.jsx';
+import { useAuthModal } from '../hooks/useModal.jsx';
 
 const loginSchema = z.object({
   email: z.string().email('البريد الإلكتروني غير صحيح'),
