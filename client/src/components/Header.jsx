@@ -152,6 +152,9 @@ const Header = () => {
                     <DropdownMenuItem asChild>
                       <Link href="/profile" className="w-full">View your channel</Link>
                     </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link href="/history" className="w-full">History</Link>
+                    </DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem onClick={logout}>Sign out</DropdownMenuItem>
                   </>
@@ -253,6 +256,9 @@ const Header = () => {
                       <>
                         <DropdownMenuItem asChild>
                           <Link href="/profile" className="w-full">View your channel</Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                          <Link href="/history" className="w-full">History</Link>
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem onClick={logout}>Sign out</DropdownMenuItem>

@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
 import SearchSection from '../components/SearchSection';
-import ServicesGrid from '../components/ServicesGrid';
+// import ServicesGrid from '../components/ServicesGrid';
 import PartnerCompanies from '../components/PartnerCompanies';
 
 const Home = () => {
@@ -11,7 +11,7 @@ const Home = () => {
       <Header />
       <Hero />
       <SearchSection />
-      <ServicesGrid />
+      {/* <ServicesGrid /> */}
       <PartnerCompanies />
       
       {/* About Section */}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   DocumentTextIcon, 
   BuildingOfficeIcon, 
@@ -9,6 +9,7 @@ import {
   ShieldCheckIcon,
   ChartBarIcon
 } from '@heroicons/react/24/outline';
+import ServiceFormModal from './ServiceFormModal';
 
 const services = [
   {
@@ -85,11 +86,39 @@ const services = [
   }
 ];
 
+const getBorderColor = (gradient) => {
+  // Extract the first color from the gradient string (e.g., 'from-blue-500 to-blue-600')
+  // and convert it to a Tailwind color code or fallback to a default
+  if (!gradient) return '#2563eb'; // fallback blue
+  const match = gradient.match(/from-([\w-]+)/);
+  if (!match) return '#2563eb';
+  // Map some common tailwind colors to hex for border
+  const colorMap = {
+    'blue-500': '#3b82f6',
+    'green-500': '#22c55e',
+    'purple-500': '#a21caf',
+    'orange-500': '#f97316',
+    'pink-500': '#ec4899',
+    'indigo-500': '#6366f1',
+    'red-500': '#ef4444',
+    'teal-500': '#14b8a6',
+  };
+  const colorKey = match[1];
+  return colorMap[colorKey] || '#2563eb';
+};
+
 const ServicesGrid = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState(null);
+
   const handleServiceClick = (service) => {
-    // Handle service click - you can customize this based on your needs
-    console.log('Service clicked:', service.title);
-    // You can add navigation, modal opening, or any other action here
+    setSelectedService(service);
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+    setSelectedService(null);
   };
 
   return (
@@ -188,6 +217,16 @@ const ServicesGrid = () => {
             </div>
           ))}
         </div>
+
+        {/* Modal for Service Form */}
+        {selectedService && (
+          <ServiceFormModal
+            open={modalOpen}
+            onClose={handleCloseModal}
+            title={selectedService.title}
+            borderColor={getBorderColor(selectedService.color)}
+          />
+        )}
       </div>
     </section>
   );
