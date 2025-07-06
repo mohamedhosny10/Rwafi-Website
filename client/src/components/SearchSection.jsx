@@ -1,174 +1,192 @@
-import { useState, useEffect, useRef } from 'react';
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import { useQuery } from '@tanstack/react-query';
-import { searchAPI } from '../lib/api';
-import { POPULAR_TAGS } from '../utils/constants';
-import { useToast } from '../hooks/use-toast';
+import React, { useState } from 'react';
+import { MagnifyingGlassIcon, MapPinIcon, BuildingOfficeIcon } from '@heroicons/react/24/outline';
 
 const SearchSection = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [showSuggestions, setShowSuggestions] = useState(false);
-  const searchRef = useRef(null);
-  const { toast } = useToast();
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [isSearching, setIsSearching] = useState(false);
 
-  // Get search suggestions
-  const { data: suggestions = [], isLoading: suggestionsLoading } = useQuery({
-    queryKey: ['/api/search/suggestions', searchQuery],
-    enabled: searchQuery.length > 2,
-    retry: false,
-    onError: (error) => {
-      console.error('Failed to fetch suggestions:', error);
-    }
-  });
+  const categories = [
+    { id: 'all', name: 'All Services', icon: BuildingOfficeIcon },
+    { id: 'documentation', name: 'Documentation', icon: BuildingOfficeIcon },
+    { id: 'government', name: 'Government Services', icon: BuildingOfficeIcon },
+    { id: 'logistics', name: 'Logistics', icon: BuildingOfficeIcon },
+    { id: 'hr', name: 'HR Services', icon: BuildingOfficeIcon },
+  ];
 
-  // Get popular tags
-  const { data: popularTags = POPULAR_TAGS } = useQuery({
-    queryKey: ['/api/search/popular-tags'],
-    retry: false,
-    onError: () => {
-      // Fallback to static tags if API fails
-      console.warn('Using fallback popular tags');
-    }
-  });
+  const popularSearches = [
+    'Business Registration',
+    'Visa Processing',
+    'Customs Clearance',
+    'Document Translation',
+    'Work Permits',
+    'Company Formation'
+  ];
 
-  const handleSearchInput = (event) => {
-    const value = event.target.value;
-    setSearchQuery(value);
-    setShowSuggestions(value.length > 0);
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setIsSearching(true);
+    
+    // Simulate search processing
+    setTimeout(() => {
+      setIsSearching(false);
+      // Handle search logic here
+      console.log('Searching for:', searchQuery, 'in category:', selectedCategory);
+    }, 1000);
   };
 
-  const handleSearch = async () => {
-    if (!searchQuery.trim()) {
-      toast({
-        variant: "destructive",
-        title: "خطأ في البحث",
-        description: "يرجى إدخال كلمة للبحث",
-      });
-      return;
-    }
-
-    try {
-      const response = await searchAPI.search(searchQuery);
-      console.log('Search results:', response.data);
-      
-      toast({
-        title: "نتائج البحث",
-        description: `تم العثور على ${response.data.results?.length || 0} نتيجة`,
-      });
-      
-      // Here you would typically navigate to a results page or update UI
-      // For now, we'll just log the results
-    } catch (error) {
-      console.error('Search failed:', error);
-      toast({
-        variant: "destructive",
-        title: "خطأ في البحث",
-        description: "حدث خطأ أثناء البحث، يرجى المحاولة مرة أخرى",
-      });
-    }
+  const handleQuickSearch = (query) => {
+    setSearchQuery(query);
+    // Trigger search immediately
+    console.log('Quick search for:', query);
   };
-
-  const handleKeyPress = (event) => {
-    if (event.key === 'Enter') {
-      handleSearch();
-    }
-  };
-
-  const selectSuggestion = (suggestion) => {
-    setSearchQuery(suggestion);
-    setShowSuggestions(false);
-    // Automatically search when suggestion is selected
-    setTimeout(() => handleSearch(), 100);
-  };
-
-  const selectTag = (tag) => {
-    setSearchQuery(tag);
-    setTimeout(() => handleSearch(), 100);
-  };
-
-  // Close suggestions when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (searchRef.current && !searchRef.current.contains(event.target)) {
-        setShowSuggestions(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
 
   return (
-    <section className="py-16 bg-white" id="search-section">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h3 className="text-3xl font-bold text-gray-900 mb-4 arabic-text">
-            ابحث عن الخدمة التي تحتاجها
-          </h3>
-          <p className="text-lg text-gray-600">
-            Find the service you need quickly and efficiently
+    <section className="py-20 bg-gradient-to-br from-primary/5 via-white to-blue-50">
+      <div className="container-modern">
+        {/* Section Header */}
+        <div className="text-center mb-12 fade-in">
+          <h2 className="text-gradient mb-4">
+            Find the Right Service for Your Business
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Search through our comprehensive range of logistics and business services 
+            to find exactly what you need for your Saudi Arabian operations.
           </p>
         </div>
 
-        {/* Search Bar */}
-        <div className="relative mb-8" ref={searchRef}>
-          <div className="relative">
-            <input 
-              type="text" 
-              placeholder="أنا محتاج..." 
-              value={searchQuery}
-              onChange={handleSearchInput}
-              onKeyPress={handleKeyPress}
-              className="w-full px-6 py-4 pr-16 text-lg border-2 border-gray-200 rounded-2xl focus:border-primary focus:ring-4 focus:ring-blue-100 outline-none transition-all duration-200 arabic-text"
-              dir="rtl"
-            />
-            <button 
-              onClick={handleSearch}
-              className="absolute left-3 top-1/2 transform -translate-y-1/2 px-6 py-2 bg-primary text-white rounded-xl hover:bg-blue-800 transition-colors duration-200 flex items-center space-x-2"
-            >
-              <MagnifyingGlassIcon className="w-4 h-4" />
-              <span>ابحث</span>
-            </button>
-          </div>
-          
-          {/* Search Suggestions Dropdown */}
-          {showSuggestions && (
-            <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-lg border border-gray-200 z-10 max-h-64 overflow-y-auto">
-              {suggestionsLoading ? (
-                <div className="p-4 text-center text-gray-500">جاري البحث...</div>
-              ) : suggestions.length > 0 ? (
-                <div className="p-4 space-y-2">
-                  {suggestions.map((suggestion, index) => (
-                    <div 
-                      key={index}
-                      onClick={() => selectSuggestion(suggestion)}
-                      className="p-3 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors duration-200 arabic-text"
-                    >
-                      {suggestion}
-                    </div>
-                  ))}
+        {/* Search Interface */}
+        <div className="max-w-4xl mx-auto slide-up">
+          <div className="card p-8 shadow-xl">
+            {/* Search Form */}
+            <form onSubmit={handleSearch} className="space-y-6">
+              {/* Category Selection */}
+              <div className="flex flex-wrap gap-3">
+                {categories.map((category) => (
+                  <button
+                    key={category.id}
+                    type="button"
+                    onClick={() => setSelectedCategory(category.id)}
+                    className={`flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 focus-ring ${
+                      selectedCategory === category.id
+                        ? 'bg-primary text-white shadow-lg'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
+                  >
+                    <category.icon className="w-4 h-4" />
+                    <span>{category.name}</span>
+                  </button>
+                ))}
+              </div>
+
+              {/* Search Input */}
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <MagnifyingGlassIcon className="w-5 h-5 text-gray-400" />
                 </div>
-              ) : searchQuery.length > 2 ? (
-                <div className="p-4 text-center text-gray-500">لا توجد اقتراحات</div>
-              ) : null}
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search for services, documents, or requirements..."
+                  className="input pl-12 pr-4 py-4 text-lg w-full"
+                />
+                <button
+                  type="submit"
+                  disabled={isSearching || !searchQuery.trim()}
+                  className="absolute inset-y-0 right-0 px-6 flex items-center btn btn-primary rounded-l-none"
+                >
+                  {isSearching ? (
+                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  ) : (
+                    'Search'
+                  )}
+                </button>
+              </div>
+            </form>
+
+            {/* Popular Searches */}
+            <div className="mt-8 pt-8 border-t border-gray-200">
+              <h3 className="text-sm font-medium text-gray-700 mb-4">
+                Popular Searches:
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {popularSearches.map((search) => (
+                  <button
+                    key={search}
+                    onClick={() => handleQuickSearch(search)}
+                    className="px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 transition-colors duration-200 focus-ring"
+                  >
+                    {search}
+                  </button>
+                ))}
+              </div>
             </div>
-          )}
+          </div>
         </div>
 
-        {/* Popular Tags */}
-        <div className="text-center">
-          <p className="text-sm text-gray-500 mb-4 arabic-text">خدمات شائعة:</p>
-          <div className="flex flex-wrap justify-center gap-3">
-            {popularTags.map((tag, index) => (
-              <button 
-                key={index}
-                onClick={() => selectTag(tag)}
-                className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full hover:bg-primary hover:text-white transition-all duration-200 text-sm arabic-text"
-              >
-                {tag}
-              </button>
-            ))}
+        {/* Search Results Preview */}
+        {searchQuery && (
+          <div className="mt-8 max-w-4xl mx-auto slide-up">
+            <div className="card p-6">
+              <h3 className="text-lg font-semibold mb-4">
+                Search Results for "{searchQuery}"
+              </h3>
+              <div className="space-y-4">
+                {[1, 2, 3].map((item) => (
+                  <div key={item} className="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200 cursor-pointer">
+                    <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                      <BuildingOfficeIcon className="w-5 h-5 text-primary" />
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-medium text-foreground">
+                        {searchQuery} Service {item}
+                      </h4>
+                      <p className="text-sm text-muted-foreground">
+                        Comprehensive solution for {searchQuery.toLowerCase()} requirements
+                      </p>
+                    </div>
+                    <button className="btn btn-outline text-sm">
+                      Learn More
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
+        )}
+
+        {/* Features Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+          {[
+            {
+              icon: MagnifyingGlassIcon,
+              title: 'Smart Search',
+              description: 'AI-powered search that understands your business needs and suggests relevant services.'
+            },
+            {
+              icon: MapPinIcon,
+              title: 'Local Expertise',
+              description: 'Deep understanding of Saudi Arabian regulations and business requirements.'
+            },
+            {
+              icon: BuildingOfficeIcon,
+              title: 'Comprehensive Solutions',
+              description: 'End-to-end services from initial setup to ongoing operations and compliance.'
+            }
+          ].map((feature, index) => (
+            <div key={index} className="text-center scale-in" style={{ animationDelay: `${index * 0.2}s` }}>
+              <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <feature.icon className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-lg font-semibold text-foreground mb-2">
+                {feature.title}
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                {feature.description}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </section>

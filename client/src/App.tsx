@@ -6,11 +6,19 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "./hooks/useAuth.jsx";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home.jsx";
+import SignIn from "@/pages/SignIn.jsx";
+import SignUp from "@/pages/SignUp.jsx";
+import Dashboard from "@/pages/Dashboard.jsx";
+import FAQ from "@/pages/FAQ.jsx";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/signin" component={SignIn} />
+      <Route path="/signup" component={SignUp} />
+      <Route path="/dashboard" component={Dashboard} />
+      <Route path="/faq" component={FAQ} />
       <Route component={NotFound} />
     </Switch>
   );
