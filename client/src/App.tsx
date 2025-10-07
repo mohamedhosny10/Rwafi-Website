@@ -9,7 +9,6 @@ import Home from "@/pages/Home.jsx";
 import SignIn from "@/pages/SignIn.jsx";
 import SignUp from "@/pages/SignUp.jsx";
 import Dashboard from "@/pages/Dashboard.jsx";
-import FAQ from "@/pages/FAQ.jsx";
 import Profile from "@/pages/Profile.jsx";
 import HistoryPage from "@/pages/HistoryPage.jsx";
 
