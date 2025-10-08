@@ -6,7 +6,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "./hooks/useAuth.jsx";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home.jsx";
-// import FAQ from "@/pages/FAQ.jsx";
 import SignIn from "@/pages/SignIn.jsx";
 import SignUp from "@/pages/SignUp.jsx";
 import Dashboard from "@/pages/Dashboard.jsx";
@@ -20,7 +19,7 @@ function Router() {
       <Route path="/signin" component={SignIn} />
       <Route path="/signup" component={SignUp} />
       <Route path="/dashboard" component={Dashboard} />
-      <Route path="/faq" component={FAQ} />
+   
       <Route path="/profile" component={Profile} />
       <Route path="/history" component={HistoryPage} />
       <Route component={NotFound} />
