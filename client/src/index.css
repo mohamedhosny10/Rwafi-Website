@@ -239,7 +239,23 @@
   
   /* Text Gradients */
   .text-gradient {
-    @apply bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent;
+    color: hsl(221.2, 83.2%, 53.3%);
+    background: linear-gradient(135deg, hsl(221.2, 83.2%, 53.3%) 0%, hsl(217.2, 91.2%, 59.8%) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+  }
+  
+  /* Fallback for browsers that don't support background-clip: text */
+  @supports not (background-clip: text) {
+    .text-gradient {
+      color: hsl(221.2, 83.2%, 53.3%);
+      background: none;
+      -webkit-background-clip: initial;
+      -webkit-text-fill-color: initial;
+      background-clip: initial;
+    }
   }
   
   /* Smooth Transitions */

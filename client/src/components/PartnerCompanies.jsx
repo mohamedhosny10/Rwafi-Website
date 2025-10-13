@@ -6,49 +6,49 @@ const partnerCompanies = [
   {
     id: 1,
     name: 'Saudi Aramco',
-    logo: 'https://via.placeholder.com/200x100/1e40af/ffffff?text=Aramco',
+    logo: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDIwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjMDA0QzQ5Ii8+Cjx0ZXh0IHg9IjEwMCIgeT0iNjAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5BUkFNQ088L3RleHQ+Cjwvc3ZnPgo=',
     description: 'Leading energy company'
   },
   {
     id: 2,
     name: 'SABIC',
-    logo: 'https://via.placeholder.com/200x100/059669/ffffff?text=SABIC',
+    logo: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDIwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjMDA2NjMzIi8+Cjx0ZXh0IHg9IjEwMCIgeT0iNjAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyOCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5TQUJJQzwvdGV4dD4KPC9zdmc+Cg==',
     description: 'Global chemicals company'
   },
   {
     id: 3,
     name: 'STC',
-    logo: 'https://via.placeholder.com/200x100/dc2626/ffffff?text=STC',
+    logo: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDIwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjRkY2NjAwIi8+Cjx0ZXh0IHg9IjEwMCIgeT0iNjAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzMiIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5TVEM8L3RleHQ+Cjwvc3ZnPgo=',
     description: 'Telecommunications leader'
   },
   {
     id: 4,
     name: 'Al Rajhi Bank',
-    logo: 'https://via.placeholder.com/200x100/7c3aed/ffffff?text=Al+Rajhi',
+    logo: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDIwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjMDA3QzQ0Ii8+Cjx0ZXh0IHg9IjEwMCIgeT0iNjAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5BbCBSYWpoaSBCYW5rPC90ZXh0Pgo8L3N2Zz4K',
     description: 'Islamic banking services'
   },
   {
     id: 5,
     name: 'Maaden',
-    logo: 'https://via.placeholder.com/200x100/ea580c/ffffff?text=Maaden',
+    logo: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDIwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjRkY4QzAwIi8+Cjx0ZXh0IHg9IjEwMCIgeT0iNjAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyOCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5NQUFERU48L3RleHQ+Cjwvc3ZnPgo=',
     description: 'Mining and metals'
   },
   {
     id: 6,
     name: 'NEOM',
-    logo: 'https://via.placeholder.com/200x100/0891b2/ffffff?text=NEOM',
+    logo: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDIwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjMDA5OUNCIi8+Cjx0ZXh0IHg9IjEwMCIgeT0iNjAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzMiIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5ORU9NPC90ZXh0Pgo8L3N2Zz4K',
     description: 'Future city project'
   },
   {
     id: 7,
     name: 'Red Sea Global',
-    logo: 'https://via.placeholder.com/200x100/be123c/ffffff?text=Red+Sea',
+    logo: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDIwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjRkY0NDQ0Ii8+Cjx0ZXh0IHg9IjEwMCIgeT0iNjAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5SZWQgU2VhIEdsb2JhbDwvdGV4dD4KPC9zdmc+Cg==',
     description: 'Tourism development'
   },
   {
     id: 8,
     name: 'Qiddiya',
-    logo: 'https://via.placeholder.com/200x100/166534/ffffff?text=Qiddiya',
+    logo: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDIwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjOEI1QzEzIi8+Cjx0ZXh0IHg9IjEwMCIgeT0iNjAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5RSUREWUE8L3RleHQ+Cjwvc3ZnPgo=',
     description: 'Entertainment destination'
   }
 ];
@@ -145,13 +145,20 @@ const PartnerCompanies = () => {
                   style={{ width: `${100 / 4}%` }}
                 >
                   <div className="card card-hover p-6 h-48 flex flex-col items-center justify-center text-center group">
-                    <div className="w-32 h-16 mb-4 overflow-hidden rounded-lg bg-white shadow-sm border">
+                    <div className="w-32 h-16 mb-4 overflow-hidden rounded-lg bg-white shadow-sm border flex items-center justify-center">
                       <img
                         src={company.logo}
                         alt={`${company.name} logo`}
-                        className="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-110"
+                        className="max-w-full max-h-full object-contain p-2 transition-transform duration-300 group-hover:scale-110"
                         loading="lazy"
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                          e.target.nextSibling.style.display = 'flex';
+                        }}
                       />
+                      <div className="hidden w-full h-full items-center justify-center bg-gray-100 text-gray-600 font-semibold text-sm">
+                        {company.name}
+                      </div>
                     </div>
                     <h3 className="font-semibold text-lg mb-2 text-foreground">
                       {company.name}
@@ -186,13 +193,20 @@ const PartnerCompanies = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-12 lg:hidden">
           {partnerCompanies.slice(0, 8).map((company) => (
             <div key={company.id} className="card card-hover p-4 text-center">
-              <div className="w-16 h-8 mx-auto mb-3 overflow-hidden rounded bg-white shadow-sm border">
+              <div className="w-16 h-8 mx-auto mb-3 overflow-hidden rounded bg-white shadow-sm border flex items-center justify-center">
                 <img
                   src={company.logo}
                   alt={`${company.name} logo`}
-                  className="w-full h-full object-contain p-1"
+                  className="max-w-full max-h-full object-contain p-1"
                   loading="lazy"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.nextSibling.style.display = 'flex';
+                  }}
                 />
+                <div className="hidden w-full h-full items-center justify-center bg-gray-100 text-gray-600 font-semibold text-xs">
+                  {company.name}
+                </div>
               </div>
               <h4 className="font-medium text-sm text-foreground">
                 {company.name}
