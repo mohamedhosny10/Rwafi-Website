@@ -48,11 +48,11 @@ const SignIn = () => {
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-indigo-400/20 to-blue-400/20 rounded-full blur-3xl"></div>
       </div>
 
-      <div className="relative min-h-screen flex items-center justify-center p-4">
+      <div className="relative min-h-screen flex items-center justify-center p-4 pt-20">
         {/* Back to Home Button */}
-        <Link href="/" className="absolute top-8 left-8 flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors duration-200">
+        <Link href="/" className="absolute top-4 left-4 md:top-8 md:left-8 flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors duration-200 z-10">
           <ArrowLeftIcon className="w-5 h-5" />
-          <span className="font-medium">Back to Home</span>
+          <span className="font-medium hidden sm:inline">Back to Home</span>
         </Link>
 
         <div className="w-full max-w-md">

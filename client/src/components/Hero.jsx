@@ -4,7 +4,7 @@ import { ArrowRightIcon, PlayIcon } from '@heroicons/react/24/outline';
 
 const Hero = () => {
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 md:pt-28 lg:pt-32">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-indigo-50" />
       <div className="absolute inset-0 opacity-5">

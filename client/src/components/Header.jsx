@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
@@ -16,6 +16,8 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { user, isAuthenticated, logout } = useAuth();
+  const menuRef = useRef(null);
+  const buttonRef = useRef(null);
 
   // Handle scroll effect
   useEffect(() => {
@@ -27,16 +29,31 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close menu when clicking outside
+  // Close menu when clicking outside and prevent body scroll
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (isMenuOpen && !event.target.closest(".header-menu")) {
+      if (isMenuOpen && 
+          menuRef.current && 
+          buttonRef.current &&
+          !menuRef.current.contains(event.target) && 
+          !buttonRef.current.contains(event.target)) {
         setIsMenuOpen(false);
       }
     };
 
-    document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
+    // Prevent body scroll when menu is open
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+      // Use capture phase to handle clicks before they bubble
+      document.addEventListener("click", handleClickOutside, true);
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside, true);
+      document.body.style.overflow = 'unset';
+    };
   }, [isMenuOpen]);
 
   const navigation = [
@@ -173,110 +190,109 @@ const Header = () => {
 
           {/* Mobile Menu Button */}
           <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden btn btn-ghost p-2 focus-ring"
+            ref={buttonRef}
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsMenuOpen(!isMenuOpen);
+            }}
+            className="lg:hidden p-2 rounded-md hover:bg-white/20 transition-colors duration-200 border border-white/20"
             aria-label="Toggle menu"
+            aria-expanded={isMenuOpen}
+            type="button"
+            style={{ zIndex: 1000 }}
           >
             {isMenuOpen ? (
-              <XMarkIcon className="w-6 h-6" />
+              <XMarkIcon className="w-6 h-6 text-foreground" />
             ) : (
-              <Bars3Icon className="w-6 h-6" />
+              <Bars3Icon className="w-6 h-6 text-foreground" />
             )}
           </button>
         </div>
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="lg:hidden">
-            <div className="glass rounded-xl mt-4 p-6 shadow-xl border">
-              <nav className="flex flex-col space-y-4">
+          <>
+            {/* Backdrop */}
+            <div 
+              className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 lg:hidden"
+              onClick={() => setIsMenuOpen(false)}
+            />
+            
+            {/* Menu Content */}
+            <div ref={menuRef} className="lg:hidden header-menu relative z-50">
+              <div className="glass rounded-xl mt-4 p-6 shadow-xl border animate-in slide-in-from-top-2 duration-200">
+                <nav className="flex flex-col space-y-2">
                 {navigation.map((item) => (
                   item.isRoute ? (
                     <Link
                       key={item.name}
                       href={item.href}
+                      onClick={() => setIsMenuOpen(false)}
                       className="text-base font-medium text-foreground hover:text-primary transition-colors duration-200 focus-ring rounded-lg px-4 py-3 hover:bg-gray-50"
                     >
                       {item.name}
                     </Link>
                   ) : (
-                    <a
+                    <button
                       key={item.name}
-                      href={item.href}
                       onClick={() => scrollToSection(item.href)}
-                      className="text-base font-medium text-foreground hover:text-primary transition-colors duration-200 focus-ring rounded-lg px-4 py-3 hover:bg-gray-50"
+                      className="text-base font-medium text-foreground hover:text-primary transition-colors duration-200 focus-ring rounded-lg px-4 py-3 hover:bg-gray-50 text-left"
                     >
                       {item.name}
-                    </a>
+                    </button>
                   )
                 ))}
-              </nav>
+                </nav>
 
-              <div className="flex flex-col space-y-3 mt-6 pt-6 border-t border-gray-200">
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <button className="focus:outline-none">
-                      <Avatar>
-                        {isAuthenticated && user?.avatarUrl ? (
-                          <AvatarImage src={user.avatarUrl} alt={user.fullName || user.email} />
-                        ) : (
-                          <AvatarFallback>
-                            {isAuthenticated
-                              ? (user?.fullName?.[0] || user?.email?.[0] || "U")
-                              : "G"}
-                          </AvatarFallback>
-                        )}
-                      </Avatar>
-                    </button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="w-64">
-                    <div className="flex items-center space-x-3 p-3 border-b">
-                      <Avatar>
-                        {isAuthenticated && user?.avatarUrl ? (
-                          <AvatarImage src={user.avatarUrl} alt={user.fullName || user.email} />
-                        ) : (
-                          <AvatarFallback>
-                            {isAuthenticated
-                              ? (user?.fullName?.[0] || user?.email?.[0] || "U")
-                              : "G"}
-                          </AvatarFallback>
-                        )}
-                      </Avatar>
-                      <div>
-                        <div className="font-semibold text-base text-foreground">
-                          {isAuthenticated ? (user?.fullName || user?.email) : "Guest"}
-                        </div>
-                        <div className="text-xs text-muted-foreground">
-                          {isAuthenticated ? user?.email : "Not signed in"}
-                        </div>
-                      </div>
-                    </div>
-                    {isAuthenticated ? (
-                      <>
-                        <DropdownMenuItem asChild>
-                          <Link href="/profile" className="w-full">View your channel</Link>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem asChild>
-                          <Link href="/history" className="w-full">History</Link>
-                        </DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem onClick={logout}>Sign out</DropdownMenuItem>
-                      </>
-                    ) : (
-                      <>
-                        <DropdownMenuItem asChild>
-                          <Link href="/signin" className="w-full">Sign In</Link>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem asChild>
-                          <Link href="/signup" className="w-full">Sign Up</Link>
-                        </DropdownMenuItem>
-                      </>
-                    )}
-                  </DropdownMenuContent>
-                </DropdownMenu>
+                <div className="flex flex-col space-y-3 mt-6 pt-6 border-t border-gray-200">
+                  {isAuthenticated ? (
+                    <>
+                      <Link
+                        href="/profile"
+                        onClick={() => setIsMenuOpen(false)}
+                        className="text-base font-medium text-foreground hover:text-primary transition-colors duration-200 focus-ring rounded-lg px-4 py-3 hover:bg-gray-50"
+                      >
+                        Profile
+                      </Link>
+                      <Link
+                        href="/history"
+                        onClick={() => setIsMenuOpen(false)}
+                        className="text-base font-medium text-foreground hover:text-primary transition-colors duration-200 focus-ring rounded-lg px-4 py-3 hover:bg-gray-50"
+                      >
+                        History
+                      </Link>
+                      <button
+                        onClick={() => {
+                          logout();
+                          setIsMenuOpen(false);
+                        }}
+                        className="text-base font-medium text-red-600 hover:text-red-700 transition-colors duration-200 focus-ring rounded-lg px-4 py-3 hover:bg-red-50 text-left"
+                      >
+                        Sign Out
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <Link
+                        href="/signin"
+                        onClick={() => setIsMenuOpen(false)}
+                        className="text-base font-medium text-foreground hover:text-primary transition-colors duration-200 focus-ring rounded-lg px-4 py-3 hover:bg-gray-50"
+                      >
+                        Sign In
+                      </Link>
+                      <Link
+                        href="/signup"
+                        onClick={() => setIsMenuOpen(false)}
+                        className="text-base font-medium text-primary hover:text-primary/80 transition-colors duration-200 focus-ring rounded-lg px-4 py-3 hover:bg-primary/5"
+                      >
+                        Sign Up
+                      </Link>
+                    </>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
+          </>
         )}
       </div>
     </header>

@@ -89,12 +89,12 @@ const SearchSection = () => {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search for services, documents, or requirements..."
-                  className="input pl-12 pr-4 py-4 text-lg w-full"
+                  className="input pl-12 pr-28 py-4 text-lg w-full"
                 />
                 <button
                   type="submit"
                   disabled={isSearching || !searchQuery.trim()}
-                  className="absolute inset-y-0 right-0 px-6 flex items-center btn btn-primary rounded-l-none"
+                  className="absolute inset-y-0 right-0 h-full px-6 flex items-center btn btn-primary rounded-l-none min-w-[108px]"
                 >
                   {isSearching ? (
                     <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
