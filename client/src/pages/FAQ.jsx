@@ -8,7 +8,7 @@ import {
 } from "../components/ui/accordion";
 import { Link } from 'wouter';
 import { ArrowLeftIcon } from '@heroicons/react/24/outline';
-// import { getAllFAQ } from '../Services/FAQ.js'; // Adjust path as needed
+import { getAllFAQ } from '../Services/FAQ';
 
 const FAQ = () => {
   const [faqs, setFaqs] = useState([]);
