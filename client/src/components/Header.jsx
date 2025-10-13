@@ -45,7 +45,6 @@ const Header = () => {
     { name: "Partners", href: "#partners" },
     { name: "About", href: "#about" },
     { name: "Contact", href: "#contact" },
-    { name: "FAQ", href: "/faq", isRoute: true },
   ];
 
   const scrollToSection = (href) => {
