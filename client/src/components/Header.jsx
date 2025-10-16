@@ -65,10 +65,15 @@ const Header = () => {
   ];
 
   const scrollToSection = (href) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+    const target = document.querySelector(href);
+    if (!target) {
+      setIsMenuOpen(false);
+      return;
     }
+    const header = document.querySelector('header');
+    const headerHeight = header ? header.offsetHeight : 0;
+    const top = target.getBoundingClientRect().top + window.scrollY - headerHeight - 8; // small gap
+    window.scrollTo({ top, behavior: 'smooth' });
     setIsMenuOpen(false);
   };
 

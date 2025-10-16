@@ -92,7 +92,7 @@ const PartnerCompanies = () => {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-br from-slate-50 to-blue-50">
+    <section id="partners" className="py-20 bg-gradient-to-br from-slate-50 to-blue-50">
       <div className="container-modern">
         {/* Section Header */}
         <div className="text-center mb-16 fade-in">
